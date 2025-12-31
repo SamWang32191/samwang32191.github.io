@@ -6,7 +6,7 @@
 - [x] 修改 `src/lib/github.ts` 中的 `transformToProject` 實作。 (33f03e2)
 - [x] 執行測試並確認通過。 (33f03e2)
 
-## 階段 2：UI 層 Fallback 與錯誤處理 (TDD)
+## 階段 2：UI 層 Fallback 與錯誤處理 (TDD) [checkpoint: 566c474]
 - [x] 在 `src/components/ProjectCard.test.tsx` 增加測試案例： (4ced0b9)
   - 模擬圖片載入失敗 (onError)。
   - 驗證是否顯示了預設的 Fallback 圖片路徑。
