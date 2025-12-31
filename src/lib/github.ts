@@ -1,17 +1,13 @@
 import { Octokit } from 'octokit'
 import { Project } from '@/types'
+import { GitHubRepo } from '@/types/github'
 
-export interface GitHubRepo {
-  id: number
-  name: string
-  description: string | null
-  html_url: string
-  has_pages: boolean
-  homepage: string | null
-}
+// Re-export the GitHubRepo type for external use
+export type { GitHubRepo }
 
 /**
  * Fetches repositories for the authenticated user and filters for those with GitHub Pages enabled.
+ * Excludes repositories with the 'hidden-from-hub' topic.
  */
 export async function getUserPagesRepos(token: string): Promise<GitHubRepo[]> {
   const octokit = new Octokit({ auth: token })
@@ -21,9 +17,10 @@ export async function getUserPagesRepos(token: string): Promise<GitHubRepo[]> {
     sort: 'updated',
   })
   
-  // Explicitly mapping and filtering to match our internal interface and requirements
+  // Filter and map to our internal interface
   return data
     .filter(repo => repo.has_pages)
+    .filter(repo => !repo.topics?.includes('hidden-from-hub'))
     .map(repo => ({
       id: repo.id,
       name: repo.name,
@@ -31,6 +28,9 @@ export async function getUserPagesRepos(token: string): Promise<GitHubRepo[]> {
       html_url: repo.html_url,
       has_pages: repo.has_pages ?? false,
       homepage: repo.homepage,
+      topics: repo.topics ?? [],
+      stargazers_count: repo.stargazers_count ?? 0,
+      updated_at: repo.updated_at ?? new Date().toISOString(),
     }))
 }
 
@@ -51,6 +51,17 @@ export function transformToProject(repo: GitHubRepo): Project {
     githubUrl: repo.html_url,
     // Construct a predictable social preview URL if not provided
     imageUrl: `https://raw.githubusercontent.com/${owner}/${repoName}/main/social-preview.png`,
+    topics: repo.topics,
+    stars: repo.stargazers_count,
+    lastUpdated: repo.updated_at,
   }
 }
 
+/**
+ * Sorts projects alphabetically by title (A-Z).
+ */
+export function sortProjectsAlphabetically(projects: Project[]): Project[] {
+  return [...projects].sort((a, b) => 
+    a.title.toLowerCase().localeCompare(b.title.toLowerCase())
+  )
+}

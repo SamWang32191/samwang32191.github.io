@@ -1,5 +1,5 @@
 import ProjectCard from '@/components/ProjectCard'
-import { getUserPagesRepos, transformToProject } from '@/lib/github'
+import { getUserPagesRepos, transformToProject, sortProjectsAlphabetically } from '@/lib/github'
 import { Project } from '@/types'
 
 // Mock projects for preview fallback
@@ -11,6 +11,9 @@ const MOCK_PROJECTS: Project[] = [
     url: 'https://github.com/samwang32191/samwang32191.github.io',
     githubUrl: 'https://github.com/samwang32191/samwang32191.github.io',
     imageUrl: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800',
+    topics: ['nextjs', 'portfolio', 'tailwindcss'],
+    stars: 42,
+    lastUpdated: '2024-12-31T10:00:00Z',
   },
   {
     id: 'mock-2',
@@ -19,6 +22,9 @@ const MOCK_PROJECTS: Project[] = [
     url: 'https://github.com/samwang32191',
     githubUrl: 'https://github.com/samwang32191',
     imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800',
+    topics: ['github', 'automation'],
+    stars: 15,
+    lastUpdated: '2024-12-30T08:00:00Z',
   },
 ]
 
@@ -27,15 +33,16 @@ async function getProjects(): Promise<Project[]> {
 
   if (!token) {
     console.warn('GITHUB_TOKEN is not set. Using mock data.')
-    return MOCK_PROJECTS
+    return sortProjectsAlphabetically(MOCK_PROJECTS)
   }
 
   try {
     const repos = await getUserPagesRepos(token)
-    return repos.map(transformToProject)
+    const projects = repos.map(transformToProject)
+    return sortProjectsAlphabetically(projects)
   } catch (error) {
     console.error('Failed to fetch projects from GitHub:', error)
-    return MOCK_PROJECTS
+    return sortProjectsAlphabetically(MOCK_PROJECTS)
   }
 }
 

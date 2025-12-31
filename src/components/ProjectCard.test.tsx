@@ -10,6 +10,9 @@ const mockProject: Project = {
     url: 'https://example.com',
     githubUrl: 'https://github.com/example/test',
     imageUrl: 'https://example.com/image.png',
+    topics: ['nextjs', 'react'],
+    stars: 25,
+    lastUpdated: '2024-01-15T10:30:00Z',
 }
 
 describe('ProjectCard', () => {
