@@ -43,7 +43,7 @@ const mockRepoHidden: GitHubRepo = {
 // Mock Octokit
 vi.mock('octokit', () => {
   return {
-    Octokit: vi.fn().mockImplementation(function() {
+    Octokit: vi.fn().mockImplementation(function () {
       return {
         rest: {
           repos: {
@@ -74,7 +74,7 @@ vi.mock('octokit', () => {
 describe('getUserPagesRepos', () => {
   it('should fetch only repos with pages enabled', async () => {
     const repos = await getUserPagesRepos('fake-token')
-    
+
     expect(repos).toHaveLength(1)
     expect(repos[0].name).toBe('repo-with-pages')
     expect(repos[0].has_pages).toBe(true)
@@ -82,14 +82,14 @@ describe('getUserPagesRepos', () => {
 
   it('should exclude repos with hidden-from-hub topic', async () => {
     const repos = await getUserPagesRepos('fake-token')
-    
+
     const hiddenRepo = repos.find(r => r.name === 'hidden-repo')
     expect(hiddenRepo).toBeUndefined()
   })
 
   it('should include topics, stars, and updated_at in the response', async () => {
     const repos = await getUserPagesRepos('fake-token')
-    
+
     expect(repos[0].topics).toEqual(['nextjs', 'portfolio'])
     expect(repos[0].stargazers_count).toBe(42)
     expect(repos[0].updated_at).toBe('2024-01-15T10:30:00Z')
@@ -105,7 +105,7 @@ describe('transformToProject', () => {
     expect(project.description).toBe('A repo with pages')
     expect(project.url).toBe('https://user.github.io/repo-with-pages')
     expect(project.githubUrl).toBe('https://github.com/user/repo-with-pages')
-    expect(project.imageUrl).toBe('https://raw.githubusercontent.com/user/repo-with-pages/main/social-preview.png')
+    expect(project.imageUrl).toBe('https://opengraph.githubassets.com/1/user/repo-with-pages')
   })
 
   it('should include topics, stars, and lastUpdated in the Project', () => {
@@ -121,7 +121,7 @@ describe('transformToProject', () => {
       ...mockRepoWithPages,
       homepage: null,
     }
-    
+
     const project = transformToProject(repoWithoutHomepage)
     expect(project.url).toBe('https://github.com/user/repo-with-pages')
   })
@@ -131,7 +131,7 @@ describe('transformToProject', () => {
       ...mockRepoWithPages,
       description: null,
     }
-    
+
     const project = transformToProject(repoWithNullDesc)
     expect(project.description).toBe('')
   })

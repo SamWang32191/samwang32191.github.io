@@ -11,12 +11,12 @@ export type { GitHubRepo }
  */
 export async function getUserPagesRepos(token: string): Promise<GitHubRepo[]> {
   const octokit = new Octokit({ auth: token })
-  
+
   const { data } = await octokit.rest.repos.listForAuthenticatedUser({
     per_page: 100,
     sort: 'updated',
   })
-  
+
   // Filter and map to our internal interface
   return data
     .filter(repo => repo.has_pages)
@@ -49,8 +49,8 @@ export function transformToProject(repo: GitHubRepo): Project {
     description: repo.description ?? '',
     url: repo.homepage ?? repo.html_url,
     githubUrl: repo.html_url,
-    // Construct a predictable social preview URL if not provided
-    imageUrl: `https://raw.githubusercontent.com/${owner}/${repoName}/main/social-preview.png`,
+    // Construct a predictable social preview URL using GitHub's Open Graph service
+    imageUrl: `https://opengraph.githubassets.com/1/${owner}/${repoName}`,
     topics: repo.topics,
     stars: repo.stargazers_count,
     lastUpdated: repo.updated_at,
@@ -61,7 +61,7 @@ export function transformToProject(repo: GitHubRepo): Project {
  * Sorts projects alphabetically by title (A-Z).
  */
 export function sortProjectsAlphabetically(projects: Project[]): Project[] {
-  return [...projects].sort((a, b) => 
+  return [...projects].sort((a, b) =>
     a.title.toLowerCase().localeCompare(b.title.toLowerCase())
   )
 }
