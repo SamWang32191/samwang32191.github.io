@@ -4,7 +4,7 @@ import { getUserPagesRepos } from '@/lib/github'
 // Mock Octokit
 vi.mock('octokit', () => {
   return {
-    Octokit: vi.fn().mockImplementation(() => {
+    Octokit: vi.fn().mockImplementation(function() {
       return {
         rest: {
           repos: {
