@@ -7,13 +7,13 @@
 - [x] 執行測試並確認通過。 (33f03e2)
 
 ## 階段 2：UI 層 Fallback 與錯誤處理 (TDD)
-- [ ] 在 `src/components/ProjectCard.test.tsx` 增加測試案例：
+- [x] 在 `src/components/ProjectCard.test.tsx` 增加測試案例： (4ced0b9)
   - 模擬圖片載入失敗 (onError)。
   - 驗證是否顯示了預設的 Fallback 圖片路徑。
-- [ ] 修改 `src/components/ProjectCard.tsx`：
+- [x] 修改 `src/components/ProjectCard.tsx`： (4ced0b9)
   - 使用 `useState` 監控圖片載入狀態。
   - 實作 `onError` 處理函式，切換至預設圖片 URL。
-- [ ] 執行測試並確認通過。
+- [x] 執行測試並確認通過。 (4ced0b9)
 
 ## 階段 3：驗證與檢查點
 - [ ] 執行全域自動化測試：`npm test`。
