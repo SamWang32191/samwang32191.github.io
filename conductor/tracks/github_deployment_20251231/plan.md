@@ -10,8 +10,8 @@
 - [x] 任務：Conductor - 使用者手動驗證 'Phase 1' (協議詳見 workflow.md) [4353441]
 
 ## Phase 2: GitHub Actions 工作流實作 (GitHub Actions Implementation)
-- [ ] 任務：建立 GitHub Actions 工作流檔案
-    - [ ] 建立 `.github/workflows/deploy.yml`
+- [x] 任務：建立 GitHub Actions 工作流檔案 [1e15ddc]
+    - [x] 建立 `.github/workflows/deploy.yml`
 - [ ] 任務：配置建置步驟
     - [ ] 設定 `on: push: branches: [main]`
     - [ ] 使用 `actions/setup-node` 並指定版本為 `24`
