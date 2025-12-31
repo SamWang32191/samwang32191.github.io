@@ -1,106 +1,106 @@
-# Sam Wang's Portfolio
+# Sam Wang 的作品集
 
-A premium portfolio website built with Next.js 15 that automatically showcases GitHub Pages projects.
+一個使用 Next.js 15 打造的高質感作品集網站，自動展示 GitHub Pages 專案。
 
-## Features
+## 功能特色
 
-- 🚀 **Auto-fetch GitHub Projects** - Automatically fetches and displays your GitHub Pages repositories
-- 🎨 **Premium UI Design** - Glassmorphism, smooth animations, and responsive layouts
-- ⭐ **Rich Project Cards** - Display topics, star counts, and last updated dates
-- 🔧 **Fallback Support** - Gracefully falls back to mock data when API is unavailable
-- 📱 **Mobile First** - Fully responsive design for all devices
+- 🚀 **自動獲取 GitHub 專案** - 自動擷取並展示您的 GitHub Pages 專案庫
+- 🎨 **高級 UI 設計** - 毛玻璃效果、流暢動畫和響應式佈局
+- ⭐ **豐富的專案卡片** - 顯示標籤、星星數和最後更新時間
+- 🔧 **備援機制** - 當 API 無法使用時，優雅地切換至示範資料
+- 📱 **行動優先** - 完全響應式設計，適用於所有裝置
 
-## Getting Started
+## 快速開始
 
-### Prerequisites
+### 前置需求
 
 - Node.js 18+
-- npm or pnpm
+- npm 或 pnpm
 
-### Installation
+### 安裝
 
 ```bash
-# Install dependencies
+# 安裝相依套件
 npm install
 
-# Copy environment file
+# 複製環境變數範例檔
 cp .env.example .env.local
 ```
 
-### Environment Setup
+### 環境設定
 
-To enable fetching real data from GitHub, you need to set up a Personal Access Token:
+若要從 GitHub 獲取真實資料，您需要設定 Personal Access Token：
 
-1. Go to [GitHub Settings > Tokens](https://github.com/settings/tokens)
-2. Click "Generate new token (classic)"
-3. Select scopes: `public_repo` (for public repos only) or `repo` (for all repos)
-4. Copy the token and add it to your `.env.local` file:
+1. 前往 [GitHub Settings > Tokens](https://github.com/settings/tokens)
+2. 點選「Generate new token (classic)」
+3. 選擇權限範圍：`public_repo`（僅公開專案）或 `repo`（所有專案）
+4. 複製 Token 並加入您的 `.env.local` 檔案：
 
 ```env
 GITHUB_TOKEN=your_personal_access_token_here
 ```
 
-**Note:** Without a token, the site will display demonstration projects using mock data.
+**注意：** 若未設定 Token，網站將使用 Mock Data 顯示示範專案。
 
-### Development
+### 開發
 
 ```bash
-# Start development server
+# 啟動開發伺服器
 npm run dev
 
-# Run tests
+# 執行測試
 npm test
 
-# Build for production
+# 建置正式版本
 npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+在瀏覽器開啟 [http://localhost:3000](http://localhost:3000) 即可查看結果。
 
-## Project Structure
+## 專案結構
 
 ```
 src/
-├── app/              # Next.js App Router pages
-├── components/       # React components
-├── data/            # Static data (mock projects)
-├── lib/             # Utility functions (GitHub API client)
-├── services/        # Business logic (project service)
-├── test/            # Test files
-└── types/           # TypeScript type definitions
+├── app/              # Next.js App Router 頁面
+├── components/       # React 元件
+├── data/            # 靜態資料（Mock 專案）
+├── lib/             # 工具函式（GitHub API 客戶端）
+├── services/        # 業務邏輯（專案服務）
+├── test/            # 測試檔案
+└── types/           # TypeScript 型別定義
 ```
 
-## Tech Stack
+## 技術棧
 
-- **Framework:** Next.js 15 (App Router)
-- **Styling:** Tailwind CSS v4
-- **Testing:** Vitest + Testing Library
-- **API:** GitHub REST API via Octokit
+- **框架：** Next.js 15（App Router）
+- **樣式：** Tailwind CSS v4
+- **測試：** Vitest + Testing Library
+- **API：** 透過 Octokit 呼叫 GitHub REST API
 
-## How It Works
+## 運作原理
 
-1. The site fetches repositories from GitHub API at build time (SSG)
-2. Filters for repositories with GitHub Pages enabled (`has_pages: true`)
-3. Excludes repositories with `hidden-from-hub` topic
-4. Sorts projects alphabetically
-5. Displays rich project cards with topics, stars, and last updated info
+1. 網站在建置時從 GitHub API 獲取專案庫（SSG）
+2. 篩選已啟用 GitHub Pages 的專案（`has_pages: true`）
+3. 排除帶有 `hidden-from-hub` 標籤的專案
+4. 按專案名稱字母順序排序
+5. 以豐富的專案卡片顯示標籤、星星數和最後更新時間
 
-## Deployment
+## 部署
 
 ### GitHub Pages
 
-This project is configured for automatic deployment to GitHub Pages via GitHub Actions.
+本專案已設定透過 GitHub Actions 自動部署至 GitHub Pages。
 
-### Environment Variables for CI/CD
+### CI/CD 環境變數
 
-In your GitHub repository settings, add the following secret:
+在您的 GitHub 專案庫設定中，新增以下 Secret：
 
-- `GITHUB_TOKEN` - Your Personal Access Token (or use the default GitHub Actions token)
+- `GITHUB_TOKEN` - 您的 Personal Access Token（或使用預設的 GitHub Actions Token）
 
-## Contributing
+## 貢獻
 
-Feel free to open issues or submit pull requests!
+歡迎開立 Issue 或提交 Pull Request！
 
-## License
+## 授權
 
 MIT
