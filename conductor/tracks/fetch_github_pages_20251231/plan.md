@@ -5,7 +5,7 @@
 ## Phase 1: 環境設定與基礎建設 (Infrastructure)
 目的：確保開發環境具備呼叫 GitHub API 的能力，並定義好資料型別。
 
-- [ ] Task: 設定環境變數
+- [x] Task: 設定環境變數 `3440b49`
     - 建立或更新 `.env.local`，加入 `GITHUB_TOKEN` 範例與說明。
     - 更新 `.gitignore` 確保 `.env.local` 不被提交 (應已存在)。
 - [ ] Task: 定義資料型別 (TypeScript) (TDD)
