@@ -1,5 +1,5 @@
 import ProjectCard from '@/components/ProjectCard'
-import { getUserPagesRepos, transformToProject, sortProjectsAlphabetically } from '@/lib/github'
+import { getProjectsWithFallback } from '@/services/projectService'
 import { Project } from '@/types'
 
 // Mock projects for preview fallback
@@ -28,26 +28,8 @@ const MOCK_PROJECTS: Project[] = [
   },
 ]
 
-async function getProjects(): Promise<Project[]> {
-  const token = process.env.GITHUB_TOKEN
-
-  if (!token) {
-    console.warn('GITHUB_TOKEN is not set. Using mock data.')
-    return sortProjectsAlphabetically(MOCK_PROJECTS)
-  }
-
-  try {
-    const repos = await getUserPagesRepos(token)
-    const projects = repos.map(transformToProject)
-    return sortProjectsAlphabetically(projects)
-  } catch (error) {
-    console.error('Failed to fetch projects from GitHub:', error)
-    return sortProjectsAlphabetically(MOCK_PROJECTS)
-  }
-}
-
 export default async function Home() {
-  const projects = await getProjects()
+  const projects = await getProjectsWithFallback(process.env.GITHUB_TOKEN, MOCK_PROJECTS)
 
   return (
     <div className="space-y-16">
