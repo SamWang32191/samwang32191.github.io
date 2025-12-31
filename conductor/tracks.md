@@ -14,5 +14,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 *連結：[./conductor/tracks/fetch_github_pages_20251231/](./conductor/tracks/fetch_github_pages_20251231/)*
 ---
 
-## [~] Track: 新增 GitHub Action 部署 GitHub Pages，使用 gh-pages 分支
+## [x] Track: 新增 GitHub Action 部署 GitHub Pages，使用 gh-pages 分支
 *連結：[./conductor/tracks/github_deployment_20251231/](./conductor/tracks/github_deployment_20251231/)*
