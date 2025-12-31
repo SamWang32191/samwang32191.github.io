@@ -32,7 +32,7 @@
         - 驗證排除清單 (Topic: `hidden-from-hub`) 的篩選邏輯。
         - 驗證欄位對映正確性 (Name, Desc, Stars, Date)。
         - 驗證排序邏輯 (字母順序)。
-- [ ] Task: Conductor - 使用者手動驗證 '資料獲取與轉換邏輯' (協議詳見 workflow.md)
+- [~] Task: Conductor - 使用者手動驗證 '資料獲取與轉換邏輯' (協議詳見 workflow.md)
 
 ## Phase 3: UI 整合 (UI Integration)
 目的：將真實資料串接到 Next.js 頁面。
