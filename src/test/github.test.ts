@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { getUserPagesRepos } from '@/lib/github'
+import { getUserPagesRepos, transformToProject } from '@/lib/github'
 
 // Mock Octokit
 vi.mock('octokit', () => {
@@ -42,5 +42,25 @@ describe('github lib', () => {
     expect(repos).toHaveLength(1)
     expect(repos[0].name).toBe('repo-with-pages')
     expect(repos[0].has_pages).toBe(true)
+  })
+
+  it('should correctly transform GitHubRepo to Project', () => {
+    const mockRepo = {
+      id: 1,
+      name: 'my-cool-project',
+      description: 'A description',
+      html_url: 'https://github.com/user/my-cool-project',
+      has_pages: true,
+      homepage: 'https://user.github.io/my-cool-project',
+    }
+
+    const project = transformToProject(mockRepo)
+
+    expect(project.id).toBe('1')
+    expect(project.title).toBe('my-cool-project')
+    expect(project.description).toBe('A description')
+    expect(project.url).toBe('https://user.github.io/my-cool-project')
+    expect(project.githubUrl).toBe('https://github.com/user/my-cool-project')
+    expect(project.imageUrl).toBe('https://raw.githubusercontent.com/user/my-cool-project/main/social-preview.png')
   })
 })
