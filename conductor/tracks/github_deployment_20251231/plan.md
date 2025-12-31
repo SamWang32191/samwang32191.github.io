@@ -22,4 +22,4 @@
 - [x] 任務：測試部署流程 [ffd99d0]
     - [x] 推送變更至 GitHub `main` 分支
     - [x] 觀察 GitHub Actions 執行結果
-- [ ] 任務：Conductor - 使用者手動驗證 'Phase 2' (協議詳見 workflow.md)
+- [~] 任務：Conductor - 使用者手動驗證 'Phase 2' (協議詳見 workflow.md)
