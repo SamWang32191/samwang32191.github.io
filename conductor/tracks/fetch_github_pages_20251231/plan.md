@@ -54,4 +54,4 @@
     - 搜尋全專案，確保無殘留引用。
 - [x] Task: 更新 README 或相關文件 `2ade631`
     - 記錄如何設定 `GITHUB_TOKEN` 以進行開發。
-- [ ] Task: Conductor - 使用者手動驗證 '文件與清理' (協議詳見 workflow.md)
+- [~] Task: Conductor - 使用者手動驗證 '文件與清理' (協議詳見 workflow.md)
