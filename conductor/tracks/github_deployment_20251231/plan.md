@@ -16,9 +16,9 @@
     - [x] 設定 `on: push: branches: [main]`
     - [x] 使用 `actions/setup-node` 並指定版本為 `24`
     - [x] 安裝相依套件並執行建置
-- [ ] 任務：配置部署步驟
-    - [ ] 使用 `JamesIves/github-pages-deploy-action@v4`
-    - [ ] 設定 `folder: out` 及 `branch: gh-pages`
+- [x] 任務：配置部署步驟 [774bc9e]
+    - [x] 使用 `JamesIves/github-pages-deploy-action@v4`
+    - [x] 設定 `folder: out` 及 `branch: gh-pages`
 - [ ] 任務：測試部署流程
     - [ ] 推送變更至 GitHub `main` 分支
     - [ ] 觀察 GitHub Actions 執行結果
