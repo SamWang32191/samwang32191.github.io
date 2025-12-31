@@ -30,11 +30,7 @@ export default function RootLayout({
         <header className="sticky top-0 z-50 w-full glass border-b">
           <div className="container mx-auto px-4 h-16 flex items-center justify-between">
             <h1 className="text-xl font-bold text-gradient">SamWang Portfolio</h1>
-            <nav className="hidden md:flex items-center gap-6">
-              <a href="#" className="text-sm font-medium hover:text-primary transition-colors">Projects</a>
-              <a href="#" className="text-sm font-medium hover:text-primary transition-colors">About</a>
-              <a href="#" className="text-sm font-medium hover:text-primary transition-colors">Contact</a>
-            </nav>
+
           </div>
         </header>
         <main className="container mx-auto px-4 py-8">
