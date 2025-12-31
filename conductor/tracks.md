@@ -12,3 +12,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ## [x] Track: 現在的data 還是mock data，應該要去取得我所有的Github Pages url
 *連結：[./conductor/tracks/fetch_github_pages_20251231/](./conductor/tracks/fetch_github_pages_20251231/)*
+---
+
+## [~] Track: 新增 GitHub Action 部署 GitHub Pages，使用 gh-pages 分支
+*連結：[./conductor/tracks/github_deployment_20251231/](./conductor/tracks/github_deployment_20251231/)*

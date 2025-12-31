@@ -7,7 +7,7 @@
 - [x] 任務：本地建置測試 [1ab1906]
     - [x] 執行 `npm run build` (或對應的 pnpm/yarn 指令)
     - [x] 確認 `out` 資料夾已生成且內容正確
-- [ ] 任務：Conductor - 使用者手動驗證 'Phase 1' (協議詳見 workflow.md)
+- [~] 任務：Conductor - 使用者手動驗證 'Phase 1' (協議詳見 workflow.md)
 
 ## Phase 2: GitHub Actions 工作流實作 (GitHub Actions Implementation)
 - [ ] 任務：建立 GitHub Actions 工作流檔案
