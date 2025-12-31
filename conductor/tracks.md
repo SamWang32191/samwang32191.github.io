@@ -10,5 +10,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-## [~] Track: 現在的data 還是mock data，應該要去取得我所有的Github Pages url
+## [x] Track: 現在的data 還是mock data，應該要去取得我所有的Github Pages url
 *連結：[./conductor/tracks/fetch_github_pages_20251231/](./conductor/tracks/fetch_github_pages_20251231/)*
