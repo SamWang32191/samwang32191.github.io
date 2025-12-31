@@ -7,9 +7,9 @@
     - 修改 `src/app/page.tsx` 以移除 "Featured Projects" 標題與副標題文字。
 - [x] 任務：簡化導覽列 463c70f
     - 修改 `src/app/layout.tsx`（或包含的 Navbar 組件）以移除導覽連結（Projects, About, Contact），僅保留品牌標誌/文字。
-- [ ] 任務：執行現有測試
+- [x] 任務：執行現有測試 463c70f
     - 執行 `npm test`（或專案等效指令）以確保 ProjectCard 或其他組件無回歸錯誤。
-- [ ] 任務：Conductor - 使用者手動驗證 '內容清理與版面簡化' (協議詳見 workflow.md)
+- [~] 任務：Conductor - 使用者手動驗證 '內容清理與版面簡化' (協議詳見 workflow.md)
 
 ## 第二階段：最終驗證
 - [ ] 任務：驗證建置
