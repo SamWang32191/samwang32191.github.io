@@ -11,6 +11,7 @@ jobs:
     
     permissions:
       contents: write
+      metadata: read
     
     steps:
       - name: Checkout
@@ -28,7 +29,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
