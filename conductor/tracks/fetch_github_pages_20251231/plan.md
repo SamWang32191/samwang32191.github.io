@@ -46,7 +46,7 @@
     - 若現有 UI 未支援這些欄位，進行微調。
 - [x] Task: Conductor - 使用者手動驗證 'UI 整合' (協議詳見 workflow.md) `6a30325`
 
-## Phase 4: 文件與清理 (Documentation & Cleanup)
+## Phase 4: 文件與清理 (Documentation & Cleanup) [checkpoint: 9d24e99]
 目的：確保專案文件完整並移除不再需要的 Mock 檔案。
 
 - [x] Task: 移除 Mock Data `4ecde20`
@@ -54,4 +54,4 @@
     - 搜尋全專案，確保無殘留引用。
 - [x] Task: 更新 README 或相關文件 `2ade631`
     - 記錄如何設定 `GITHUB_TOKEN` 以進行開發。
-- [~] Task: Conductor - 使用者手動驗證 '文件與清理' (協議詳見 workflow.md)
+- [x] Task: Conductor - 使用者手動驗證 '文件與清理' (協議詳見 workflow.md) `9d24e99`
