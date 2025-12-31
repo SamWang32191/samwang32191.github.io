@@ -1,13 +1,13 @@
 # Plan: 建立基礎架構與 GitHub API 整合
 
-## Phase 1: 專案初始化與環境設定
+## Phase 1: 專案初始化與環境設定 [checkpoint: 8af2bcc]
 - [x] Task: 初始化 Next.js 專案 (TypeScript, ESLint, Tailwind CSS)
 - [x] Task: 配置 Tailwind CSS 深色模式支援與基礎佈局 (Layout)
 - [x] Task: 設定專案目錄結構 (src/components, src/lib, src/types)
-- [ ] Task: Conductor - User Manual Verification '專案初始化與環境設定' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification '專案初始化與環境設定' (Protocol in workflow.md) 8af2bcc
 
 ## Phase 2: GitHub API 整合與資料層
-- [ ] Task: 安裝並設定 Octokit SDK
+- [~] Task: 安裝並設定 Octokit SDK
 - [ ] Task: 撰寫獲取 GitHub Pages 儲存庫的測試 (Write Tests)
 - [ ] Task: 實作獲取 GitHub Pages 儲存庫的工具函式 (Implement Feature)
 - [ ] Task: 撰寫資料轉換邏輯測試 (將 GitHub API 轉換為專案內部類型)
