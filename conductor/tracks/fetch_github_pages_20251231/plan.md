@@ -15,7 +15,7 @@
         - 定義 `GitHubRepo` interface (包含 id, name, description, topics, stargazers_count, updated_at, has_pages, homepage 等)。
 - [x] Task: Conductor - 使用者手動驗證 '環境設定與基礎建設' (協議詳見 workflow.md) `e71ce2c`
 
-## Phase 2: 資料獲取與轉換邏輯 (Data Logic)
+## Phase 2: 資料獲取與轉換邏輯 (Data Logic) [checkpoint: 02b26f5]
 目的：實作與 GitHub API 溝通的核心邏輯，並包含完整的單元測試。
 
 - [x] Task: 實作 GitHub API Client (TDD) `e94304c`
@@ -32,7 +32,7 @@
         - 驗證排除清單 (Topic: `hidden-from-hub`) 的篩選邏輯。
         - 驗證欄位對映正確性 (Name, Desc, Stars, Date)。
         - 驗證排序邏輯 (字母順序)。
-- [~] Task: Conductor - 使用者手動驗證 '資料獲取與轉換邏輯' (協議詳見 workflow.md)
+- [x] Task: Conductor - 使用者手動驗證 '資料獲取與轉換邏輯' (協議詳見 workflow.md) `02b26f5`
 
 ## Phase 3: UI 整合 (UI Integration)
 目的：將真實資料串接到 Next.js 頁面。
