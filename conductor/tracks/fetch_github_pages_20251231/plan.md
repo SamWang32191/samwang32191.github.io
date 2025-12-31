@@ -13,7 +13,7 @@
     - 定義 `GitHubRepo` (API 回傳格式) 與 `Project` (內部使用格式) 的介面。
     - 子任務：
         - 定義 `GitHubRepo` interface (包含 id, name, description, topics, stargazers_count, updated_at, has_pages, homepage 等)。
-- [ ] Task: Conductor - 使用者手動驗證 '環境設定與基礎建設' (協議詳見 workflow.md)
+- [~] Task: Conductor - 使用者手動驗證 '環境設定與基礎建設' (協議詳見 workflow.md)
 
 ## Phase 2: 資料獲取與轉換邏輯 (Data Logic)
 目的：實作與 GitHub API 溝通的核心邏輯，並包含完整的單元測試。
