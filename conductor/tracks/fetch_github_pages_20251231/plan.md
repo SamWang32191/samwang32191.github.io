@@ -37,11 +37,11 @@
 ## Phase 3: UI 整合 (UI Integration)
 目的：將真實資料串接到 Next.js 頁面。
 
-- [ ] Task: 更新首頁資料獲取 (Server Component)
+- [x] Task: 更新首頁資料獲取 (Server Component) `dd88284`
     - 修改 `src/app/page.tsx`。
     - 將原本的 Mock Data 替換為呼叫 `getProjects()`。
     - 處理 Loading 與 Error 狀態 (雖然 SSG 主要在 build time 處理，但需考慮開發時體驗)。
-- [ ] Task: 更新 ProjectCard 組件 (如有必要)
+- [x] Task: 更新 ProjectCard 組件 (如有必要) `57f25db`
     - 確認 `ProjectCard` 能正確顯示新增的資訊 (Stars, Last Updated, Topics)。
     - 若現有 UI 未支援這些欄位，進行微調。
 - [ ] Task: Conductor - 使用者手動驗證 'UI 整合' (協議詳見 workflow.md)
