@@ -4,9 +4,9 @@
 - [x] 任務：更新 `next.config.ts` 以支援靜態匯出 [76b92be]
     - [x] 將 `output` 設定為 `'export'`
     - [x] (如果有使用 Image) 設定 `images.unoptimized` 為 `true` (GitHub Pages 不支援預設的 Next.js Image Optimization)
-- [ ] 任務：本地建置測試
-    - [ ] 執行 `npm run build` (或對應的 pnpm/yarn 指令)
-    - [ ] 確認 `out` 資料夾已生成且內容正確
+- [x] 任務：本地建置測試 [1ab1906]
+    - [x] 執行 `npm run build` (或對應的 pnpm/yarn 指令)
+    - [x] 確認 `out` 資料夾已生成且內容正確
 - [ ] 任務：Conductor - 使用者手動驗證 'Phase 1' (協議詳見 workflow.md)
 
 ## Phase 2: GitHub Actions 工作流實作 (GitHub Actions Implementation)
