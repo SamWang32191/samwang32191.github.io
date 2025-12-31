@@ -1,9 +1,9 @@
 # Plan: 建立基礎架構與 GitHub API 整合
 
 ## Phase 1: 專案初始化與環境設定
-- [ ] Task: 初始化 Next.js 專案 (TypeScript, ESLint, Tailwind CSS)
-- [ ] Task: 配置 Tailwind CSS 深色模式支援與基礎佈局 (Layout)
-- [ ] Task: 設定專案目錄結構 (src/components, src/lib, src/types)
+- [x] Task: 初始化 Next.js 專案 (TypeScript, ESLint, Tailwind CSS)
+- [x] Task: 配置 Tailwind CSS 深色模式支援與基礎佈局 (Layout)
+- [x] Task: 設定專案目錄結構 (src/components, src/lib, src/types)
 - [ ] Task: Conductor - User Manual Verification '專案初始化與環境設定' (Protocol in workflow.md)
 
 ## Phase 2: GitHub API 整合與資料層
