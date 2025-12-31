@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Project } from '@/types'
 import Image from 'next/image'
 
@@ -22,16 +23,21 @@ function formatDate(dateString: string): string {
     return `${Math.floor(diffDays / 365)} years ago`
 }
 
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80'
+
 export default function ProjectCard({ project }: ProjectCardProps) {
+    const [imgSrc, setImgSrc] = useState(project.imageUrl)
+
     return (
         <div className="glass-card rounded-2xl overflow-hidden flex flex-col h-full group transition-all hover:scale-[1.02] hover:shadow-2xl">
             <div className="relative aspect-video overflow-hidden">
                 <Image
-                    src={project.imageUrl}
+                    src={imgSrc}
                     alt={project.title}
                     fill
                     className="object-cover transition-transform group-hover:scale-110"
-                    unoptimized // Use unoptimized for raw.githubusercontent.com images
+                    unoptimized // Use unoptimized for raw.githubusercontent.com and opengraph images
+                    onError={() => setImgSrc(FALLBACK_IMAGE)}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                     <a

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import ProjectCard from './ProjectCard'
 import { Project } from '@/types'
@@ -86,5 +86,17 @@ describe('ProjectCard', () => {
 
         // Should not crash and should still render the card
         expect(screen.getByText('Test Project')).toBeInTheDocument()
+    })
+
+    it('uses fallback image when the primary imageUrl fails to load', () => {
+        render(<ProjectCard project={mockProject} />)
+
+        const img = screen.getByAltText(mockProject.title)
+
+        // Trigger error event
+        fireEvent.error(img)
+
+        // Verify it switches to a fallback URL
+        expect(img).toHaveAttribute('src', expect.stringContaining('unsplash.com'))
     })
 })
