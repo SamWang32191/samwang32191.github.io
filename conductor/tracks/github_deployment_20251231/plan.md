@@ -12,10 +12,10 @@
 ## Phase 2: GitHub Actions 工作流實作 (GitHub Actions Implementation)
 - [x] 任務：建立 GitHub Actions 工作流檔案 [1e15ddc]
     - [x] 建立 `.github/workflows/deploy.yml`
-- [ ] 任務：配置建置步驟
-    - [ ] 設定 `on: push: branches: [main]`
-    - [ ] 使用 `actions/setup-node` 並指定版本為 `24`
-    - [ ] 安裝相依套件並執行建置
+- [x] 任務：配置建置步驟 [b31d057]
+    - [x] 設定 `on: push: branches: [main]`
+    - [x] 使用 `actions/setup-node` 並指定版本為 `24`
+    - [x] 安裝相依套件並執行建置
 - [ ] 任務：配置部署步驟
     - [ ] 使用 `JamesIves/github-pages-deploy-action@v4`
     - [ ] 設定 `folder: out` 及 `branch: gh-pages`
