@@ -18,13 +18,13 @@
 ## Phase 2: 資料獲取與轉換邏輯 (Data Logic)
 目的：實作與 GitHub API 溝通的核心邏輯，並包含完整的單元測試。
 
-- [ ] Task: 實作 GitHub API Client (TDD)
+- [x] Task: 實作 GitHub API Client (TDD) `e94304c`
     - 建立 `src/lib/github.ts`。
     - 實作 `fetchGitHubRepos()` 函式。
     - **測試案例**：
         - 應成功呼叫 Octokit 並回傳資料。
         - 應處理 API 錯誤 (如 401, 403, 404)。
-- [ ] Task: 實作資料轉換與篩選 Service (TDD)
+- [x] Task: 實作資料轉換與篩選 Service (TDD) `dd88284`
     - 建立 `src/services/projectService.ts`。
     - 實作 `getProjects()` 函式，整合 fetch 與 transform 邏輯。
     - **測試案例**：
