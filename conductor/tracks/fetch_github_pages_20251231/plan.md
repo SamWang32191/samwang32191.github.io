@@ -8,7 +8,7 @@
 - [x] Task: 設定環境變數 `3440b49`
     - 建立或更新 `.env.local`，加入 `GITHUB_TOKEN` 範例與說明。
     - 更新 `.gitignore` 確保 `.env.local` 不被提交 (應已存在)。
-- [ ] Task: 定義資料型別 (TypeScript) (TDD)
+- [x] Task: 定義資料型別 (TypeScript) (TDD) `e94304c`
     - 建立 `src/types/github.ts` (或更新現有型別檔案)。
     - 定義 `GitHubRepo` (API 回傳格式) 與 `Project` (內部使用格式) 的介面。
     - 子任務：
