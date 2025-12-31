@@ -12,6 +12,6 @@
 - [x] 任務：Conductor - 使用者手動驗證 '內容清理與版面簡化' (協議詳見 workflow.md) d2cb87f
 
 ## 第二階段：最終驗證
-- [ ] 任務：驗證建置
+- [x] 任務：驗證建置 dd3c180
     - 執行 `npm run build` 以確保生產環境建置乾淨無誤。
 - [ ] 任務：Conductor - 使用者手動驗證 '最終驗證' (協議詳見 workflow.md)
