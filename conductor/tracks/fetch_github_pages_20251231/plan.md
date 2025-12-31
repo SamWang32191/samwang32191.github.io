@@ -49,7 +49,7 @@
 ## Phase 4: 文件與清理 (Documentation & Cleanup)
 目的：確保專案文件完整並移除不再需要的 Mock 檔案。
 
-- [ ] Task: 移除 Mock Data
+- [x] Task: 移除 Mock Data `4ecde20`
     - 刪除或封存不再使用的 Mock Data 檔案。
     - 搜尋全專案，確保無殘留引用。
 - [ ] Task: 更新 README 或相關文件
