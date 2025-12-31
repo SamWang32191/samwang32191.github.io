@@ -9,7 +9,7 @@
     - [x] 確認 `out` 資料夾已生成且內容正確
 - [x] 任務：Conductor - 使用者手動驗證 'Phase 1' (協議詳見 workflow.md) [4353441]
 
-## Phase 2: GitHub Actions 工作流實作 (GitHub Actions Implementation)
+## Phase 2: GitHub Actions 工作流實作 (GitHub Actions Implementation) [checkpoint: 171687a]
 - [x] 任務：建立 GitHub Actions 工作流檔案 [1e15ddc]
     - [x] 建立 `.github/workflows/deploy.yml`
 - [x] 任務：配置建置步驟 [b31d057]
@@ -22,4 +22,4 @@
 - [x] 任務：測試部署流程 [ffd99d0]
     - [x] 推送變更至 GitHub `main` 分支
     - [x] 觀察 GitHub Actions 執行結果
-- [~] 任務：Conductor - 使用者手動驗證 'Phase 2' (協議詳見 workflow.md)
+- [x] 任務：Conductor - 使用者手動驗證 'Phase 2' (協議詳見 workflow.md) [171687a]
