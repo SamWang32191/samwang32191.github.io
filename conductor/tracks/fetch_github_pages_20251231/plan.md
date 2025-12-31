@@ -34,7 +34,7 @@
         - 驗證排序邏輯 (字母順序)。
 - [x] Task: Conductor - 使用者手動驗證 '資料獲取與轉換邏輯' (協議詳見 workflow.md) `02b26f5`
 
-## Phase 3: UI 整合 (UI Integration)
+## Phase 3: UI 整合 (UI Integration) [checkpoint: 6a30325]
 目的：將真實資料串接到 Next.js 頁面。
 
 - [x] Task: 更新首頁資料獲取 (Server Component) `dd88284`
@@ -44,7 +44,7 @@
 - [x] Task: 更新 ProjectCard 組件 (如有必要) `57f25db`
     - 確認 `ProjectCard` 能正確顯示新增的資訊 (Stars, Last Updated, Topics)。
     - 若現有 UI 未支援這些欄位，進行微調。
-- [~] Task: Conductor - 使用者手動驗證 'UI 整合' (協議詳見 workflow.md)
+- [x] Task: Conductor - 使用者手動驗證 'UI 整合' (協議詳見 workflow.md) `6a30325`
 
 ## Phase 4: 文件與清理 (Documentation & Cleanup)
 目的：確保專案文件完整並移除不再需要的 Mock 檔案。
