@@ -1,8 +1,0 @@
-{
-    "track_id": "fetch_github_pages_20251231",
-    "type": "feature",
-    "status": "new",
-    "created_at": "2025-12-31T17:48:30+08:00",
-    "updated_at": "2025-12-31T17:48:30+08:00",
-    "description": "現在的data 還是mock data，應該要去取得我所有的Github Pages url"
-}
