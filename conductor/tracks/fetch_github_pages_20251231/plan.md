@@ -2,7 +2,7 @@
 
 本計畫旨在實作 GitHub API 整合，將首頁的 Mock Data 替換為真實的 GitHub Pages 專案列表。
 
-## Phase 1: 環境設定與基礎建設 (Infrastructure)
+## Phase 1: 環境設定與基礎建設 (Infrastructure) [checkpoint: e71ce2c]
 目的：確保開發環境具備呼叫 GitHub API 的能力，並定義好資料型別。
 
 - [x] Task: 設定環境變數 `3440b49`
@@ -13,7 +13,7 @@
     - 定義 `GitHubRepo` (API 回傳格式) 與 `Project` (內部使用格式) 的介面。
     - 子任務：
         - 定義 `GitHubRepo` interface (包含 id, name, description, topics, stargazers_count, updated_at, has_pages, homepage 等)。
-- [~] Task: Conductor - 使用者手動驗證 '環境設定與基礎建設' (協議詳見 workflow.md)
+- [x] Task: Conductor - 使用者手動驗證 '環境設定與基礎建設' (協議詳見 workflow.md) `e71ce2c`
 
 ## Phase 2: 資料獲取與轉換邏輯 (Data Logic)
 目的：實作與 GitHub API 溝通的核心邏輯，並包含完整的單元測試。
