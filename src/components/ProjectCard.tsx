@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from 'react'
 import { Project } from '@/types'
 import Image from 'next/image'
