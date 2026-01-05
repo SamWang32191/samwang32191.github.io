@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, KeyboardEvent } from 'react'
 import { Project } from '@/types'
 import Image from 'next/image'
 
@@ -34,10 +34,22 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         window.open(project.url, '_blank', 'noopener,noreferrer')
     }
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            handleCardClick()
+        }
+    }
+
     return (
         <div 
+            role="button"
+            tabIndex={0}
             onClick={handleCardClick}
-            className="glass-card rounded-2xl overflow-hidden flex flex-col h-full group transition-all hover:scale-[1.02] hover:shadow-2xl cursor-pointer"
+            onKeyDown={handleKeyDown}
+            aria-label="Visit Website"
+            title="Visit Website"
+            className="glass-card rounded-2xl overflow-hidden flex flex-col h-full group transition-all hover:scale-[1.02] hover:shadow-2xl cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
         >
             <div className="relative aspect-video overflow-hidden">
                 <Image
@@ -121,8 +133,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="View on GitHub"
+                        title="View Code"
                         onClick={(e) => e.stopPropagation()}
-                        className="flex items-center gap-1 text-primary hover:opacity-80 transition-opacity"
+                        className="flex items-center gap-1 text-primary hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

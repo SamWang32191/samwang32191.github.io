@@ -136,11 +136,46 @@ describe('ProjectCard', () => {
         expect(screen.getByText('Test Project')).toBeInTheDocument()
     })
 
-    it('uses fallback image when the primary imageUrl fails to load', () => {
-        render(<ProjectCard project={mockProject} />)
+        it('uses fallback image when the primary imageUrl fails to load', () => {
 
-        const img = screen.getByAltText(mockProject.title)
-        fireEvent.error(img)
-        expect(img).toHaveAttribute('src', expect.stringContaining('unsplash.com'))
+            render(<ProjectCard project={mockProject} />)
+
+    
+
+            const img = screen.getByAltText(mockProject.title)
+
+            fireEvent.error(img)
+
+            expect(img).toHaveAttribute('src', expect.stringContaining('unsplash.com'))
+
+        })
+
+    
+
+        // NEW TEST: Accessibility and Tooltips
+
+        it('has appropriate aria-labels and tooltips', () => {
+
+            render(<ProjectCard project={mockProject} />)
+
+    
+
+            const card = screen.getByRole('button', { name: /visit website/i }) || screen.getByLabelText(/visit website/i)
+
+            expect(card).toBeInTheDocument()
+
+            expect(card).toHaveAttribute('title', 'Visit Website')
+
+    
+
+            const githubLink = screen.getByRole('link', { name: /view on github/i })
+
+            expect(githubLink).toBeInTheDocument()
+
+            expect(githubLink).toHaveAttribute('title', 'View Code')
+
+        })
+
     })
-})
+
+    
