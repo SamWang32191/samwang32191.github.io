@@ -7,5 +7,4 @@
 
 ---
 
-## [ ] Track: 移除card左下角的star數量顯示
-*連結：[./conductor/tracks/remove_star_count_20260105/](./conductor/tracks/remove_star_count_20260105/)*
+

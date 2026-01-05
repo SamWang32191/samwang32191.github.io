@@ -1,8 +1,0 @@
-{
-    "track_id": "remove_star_count_20260105",
-    "type": "feature",
-    "status": "new",
-    "created_at": "2026-01-05T11:13:20+08:00",
-    "updated_at": "2026-01-05T11:13:20+08:00",
-    "description": "移除card左下角的star數量顯示"
-}
