@@ -20,6 +20,7 @@ export async function getUserPagesRepos(token: string): Promise<GitHubRepo[]> {
   // Filter and map to our internal interface
   return data
     .filter(repo => repo.has_pages)
+    .filter(repo => repo.homepage?.includes('samwang32191.github.io')) // 過濾掉Org的repo
     .filter(repo => !repo.topics?.includes('hidden-from-hub'))
     .map(repo => ({
       id: repo.id,

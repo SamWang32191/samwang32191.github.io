@@ -30,8 +30,15 @@ const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1498050108023-c5249f4d
 export default function ProjectCard({ project }: ProjectCardProps) {
     const [imgSrc, setImgSrc] = useState(project.imageUrl)
 
+    const handleCardClick = () => {
+        window.open(project.url, '_blank', 'noopener,noreferrer')
+    }
+
     return (
-        <div className="glass-card rounded-2xl overflow-hidden flex flex-col h-full group transition-all hover:scale-[1.02] hover:shadow-2xl">
+        <div 
+            onClick={handleCardClick}
+            className="glass-card rounded-2xl overflow-hidden flex flex-col h-full group transition-all hover:scale-[1.02] hover:shadow-2xl cursor-pointer"
+        >
             <div className="relative aspect-video overflow-hidden">
                 <Image
                     src={imgSrc}
@@ -41,16 +48,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                     unoptimized // Use unoptimized for raw.githubusercontent.com and opengraph images
                     onError={() => setImgSrc(FALLBACK_IMAGE)}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                    <a
-                        href={project.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white text-sm font-medium underline underline-offset-4"
-                    >
-                        Visit Site
-                    </a>
-                </div>
             </div>
 
             <div className="p-5 flex flex-col flex-grow">
@@ -124,6 +121,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="View on GitHub"
+                        onClick={(e) => e.stopPropagation()}
                         className="flex items-center gap-1 text-primary hover:opacity-80 transition-opacity"
                     >
                         <svg

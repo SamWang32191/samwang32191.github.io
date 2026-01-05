@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import ProjectCard from './ProjectCard'
 import { Project } from '@/types'
 
@@ -16,9 +16,18 @@ const mockProject: Project = {
 }
 
 describe('ProjectCard', () => {
+    // Mock window.open
+    const openMock = vi.fn()
+
     beforeEach(() => {
         vi.useFakeTimers()
         vi.setSystemTime(new Date('2024-12-31T12:00:00Z'))
+        vi.stubGlobal('open', openMock)
+    })
+
+    afterEach(() => {
+        vi.unstubAllGlobals()
+        openMock.mockReset()
     })
 
     it('renders project title and description', () => {
@@ -28,11 +37,51 @@ describe('ProjectCard', () => {
         expect(screen.getByText('A test project description')).toBeInTheDocument()
     })
 
-    it('contains links to project and github', () => {
+    // NEW TEST: Verify "Visit Site" link is removed
+    it('does NOT contain the "Visit Site" text link', () => {
+        render(<ProjectCard project={mockProject} />)
+        expect(screen.queryByText(/visit site/i)).not.toBeInTheDocument()
+    })
+
+    // NEW TEST: Verify clicking the card navigates to project url
+    it('navigates to project url when card body is clicked', () => {
+        render(<ProjectCard project={mockProject} />)
+        
+        const cardTitle = screen.getByText('Test Project')
+        fireEvent.click(cardTitle)
+
+        expect(openMock).toHaveBeenCalledWith(mockProject.url, '_blank', 'noopener,noreferrer')
+    })
+
+    // NEW TEST: Verify clicking the image navigates to project url
+    it('navigates to project url when card image is clicked', () => {
+        render(<ProjectCard project={mockProject} />)
+        
+        // Image is usually accessed by alt text
+        // Note: In Next.js Image, the alt text is on the img tag.
+        // We might need to click the wrapper or the image itself.
+        const image = screen.getByAltText(mockProject.title)
+        fireEvent.click(image)
+
+        expect(openMock).toHaveBeenCalledWith(mockProject.url, '_blank', 'noopener,noreferrer')
+    })
+
+    // NEW TEST: Verify GitHub link works and stops propagation
+    it('contains link to github and does not trigger card navigation when clicked', () => {
         render(<ProjectCard project={mockProject} />)
 
         const githubLink = screen.getByRole('link', { name: /view on github/i })
         expect(githubLink).toHaveAttribute('href', mockProject.githubUrl)
+        
+        // Clicking the GitHub link should NOT trigger the card's onClick
+        fireEvent.click(githubLink)
+        
+        // The window.open mock should NOT be called for the project URL because propagation should be stopped
+        // (Assuming the GitHub link is a standard anchor tag, JSDOM handles the click event)
+        // However, standard anchor tag click in JSDOM doesn't actually navigate.
+        // But if we have an onClick handler on the parent, the event bubbles up.
+        // We want to ensure that the bubble is stopped.
+        expect(openMock).not.toHaveBeenCalled()
     })
 
     it('displays topic tags', () => {
@@ -84,7 +133,6 @@ describe('ProjectCard', () => {
 
         render(<ProjectCard project={projectWithoutTopics} />)
 
-        // Should not crash and should still render the card
         expect(screen.getByText('Test Project')).toBeInTheDocument()
     })
 
@@ -92,11 +140,7 @@ describe('ProjectCard', () => {
         render(<ProjectCard project={mockProject} />)
 
         const img = screen.getByAltText(mockProject.title)
-
-        // Trigger error event
         fireEvent.error(img)
-
-        // Verify it switches to a fallback URL
         expect(img).toHaveAttribute('src', expect.stringContaining('unsplash.com'))
     })
 })
