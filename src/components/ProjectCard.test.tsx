@@ -108,10 +108,13 @@ describe('ProjectCard', () => {
         expect(screen.getByText('+2')).toBeInTheDocument()
     })
 
-    it('displays star count', () => {
+    it('does NOT display star count', () => {
         render(<ProjectCard project={mockProject} />)
 
-        expect(screen.getByText('42')).toBeInTheDocument()
+        expect(screen.queryByText('42')).not.toBeInTheDocument()
+        // Also ensure the star icon is gone if possible, but identifying by text is a good start. 
+        // We can search for the title "Stars" on the span wrapper if we want to be more specific.
+        expect(screen.queryByTitle('Stars')).not.toBeInTheDocument()
     })
 
     it('displays relative date for lastUpdated', () => {
