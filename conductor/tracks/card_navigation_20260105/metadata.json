@@ -1,8 +1,0 @@
-{
-  "track_id": "card_navigation_20260105",
-  "type": "feature",
-  "status": "new",
-  "created_at": "2026-01-05T14:00:00Z",
-  "updated_at": "2026-01-05T14:00:00Z",
-  "description": "現在都要點Visit Site才能前往網址。我希望是點Card就可以前往網址，點github icon可以前往repo，不要這個Visit Site link"
-}
