@@ -1,8 +1,0 @@
-{
-    "track_id": "nav_logo_link_20260105",
-    "type": "feature",
-    "status": "new",
-    "created_at": "2026-01-05T11:48:30Z",
-    "updated_at": "2026-01-05T11:48:30Z",
-    "description": "我想點擊nav 左上角的SamWang Portfolio時，可以跳轉到https://github.com/SamWang32191/samwang32191.github.io"
-}
