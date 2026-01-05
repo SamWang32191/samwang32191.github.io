@@ -1,258 +1,258 @@
-# Project Workflow
+# 專案工作流
 
-## Guiding Principles
+## 指導原則
 
-1. **The Plan is the Source of Truth:** All work must be tracked in `plan.md`
-2. **The Tech Stack is Deliberate:** Changes to the tech stack must be documented in `tech-stack.md` *before* implementation
-3. **Test-Driven Development:** Write unit tests before implementing functionality
-4. **High Code Coverage:** Aim for >80% code coverage for all modules
-5. **User Experience First:** Every decision should prioritize user experience
-6. **Non-Interactive & CI-Aware:** Prefer non-interactive commands. Use `CI=true` for watch-mode tools (tests, linters) to ensure single execution.
+1. **計畫是事實來源：** 所有工作都必須在 `plan.md` 中追蹤
+2. **技術堆疊經過審慎選擇：** 技術堆疊的變更必須在實作*之前*先記錄於 `tech-stack.md`
+3. **測試驅動開發：** 在實作功能之前先撰寫單元測試
+4. **高程式碼覆蓋率：** 所有模組的程式碼覆蓋率目標 >80%
+5. **使用者體驗優先：** 每個決策都應優先考量使用者體驗
+6. **非互動式與 CI 感知：** 優先使用非互動式命令。對 watch-mode 工具（測試、linter）使用 `CI=true` 以確保單次執行。
 
-## Task Workflow
+## 任務工作流
 
-All tasks follow a strict lifecycle:
+所有任務遵循嚴格的生命週期：
 
-### Standard Task Workflow
+### 標準任務工作流
 
-1. **Select Task:** Choose the next available task from `plan.md` in sequential order
+1. **選擇任務：** 從 `plan.md` 中按順序選擇下一個可用的任務
 
-2. **Mark In Progress:** Before beginning work, edit `plan.md` and change the task from `[ ]` to `[~]`
+2. **標記為進行中：** 開始工作前，編輯 `plan.md` 並將任務狀態從 `[ ]` 更改為 `[~]`
 
-3. **Write Failing Tests (Red Phase):**
-   - Create a new test file for the feature or bug fix.
-   - Write one or more unit tests that clearly define the expected behavior and acceptance criteria for the task.
-   - **CRITICAL:** Run the tests and confirm that they fail as expected. This is the "Red" phase of TDD. Do not proceed until you have failing tests.
+3. **撰寫失敗測試 (紅燈階段)：**
+   - 為該功能或錯誤修復建立新的測試檔案。
+   - 撰寫一個或多個單元測試，清楚定義任務的預期行為和驗收標準。
+   - **關鍵：** 執行測試並確認它們如預期般失敗。這是 TDD 的「紅燈」階段。在你擁有失敗的測試之前，不要繼續。
 
-4. **Implement to Pass Tests (Green Phase):**
-   - Write the minimum amount of application code necessary to make the failing tests pass.
-   - Run the test suite again and confirm that all tests now pass. This is the "Green" phase.
+4. **實作以通過測試 (綠燈階段)：**
+   - 撰寫使失敗測試通過所需的最少量應用程式碼。
+   - 再次執行測試套件並確認所有測試現在都通過。這是「綠燈」階段。
 
-5. **Refactor (Optional but Recommended):**
-   - With the safety of passing tests, refactor the implementation code and the test code to improve clarity, remove duplication, and enhance performance without changing the external behavior.
-   - Rerun tests to ensure they still pass after refactoring.
+5. **重構 (選擇性但建議)：**
+   - 在通過測試的安全保障下，重構實作程式碼和測試程式碼，以提升清晰度、消除重複並增強效能，同時不改變外部行為。
+   - 重新執行測試以確保重構後仍能通過。
 
-6. **Verify Coverage:** Run coverage reports using the project's chosen tools. For example, in a Python project, this might look like:
+6. **驗證覆蓋率：** 使用專案選定的工具執行覆蓋率報告。例如，在 Python 專案中，可能看起來像這樣：
    ```bash
    pytest --cov=app --cov-report=html
    ```
-   Target: >80% coverage for new code. The specific tools and commands will vary by language and framework.
+   目標：新程式碼 >80% 覆蓋率。具體的工具和命令會因語言和框架而異。
 
-7. **Document Deviations:** If implementation differs from tech stack:
-   - **STOP** implementation
-   - Update `tech-stack.md` with new design
-   - Add dated note explaining the change
-   - Resume implementation
+7. **記錄偏差：** 如果實作與技術堆疊有所不同：
+   - **停止**實作
+   - 使用新設計更新 `tech-stack.md`
+   - 加入帶日期的說明解釋變更
+   - 繼續實作
 
-8. **Commit Code Changes:**
-   - Stage all code changes related to the task.
-   - Propose a clear, concise commit message e.g, `feat(ui): Create basic HTML structure for calculator`.
-   - Perform the commit.
+8. **提交程式碼變更：**
+   - 暫存 (stage) 與任務相關的所有程式碼變更。
+   - 提議一個清晰、簡潔的提交訊息，例如：`feat(ui): <任務名稱>`。
+   - 執行提交。
 
-9. **Attach Task Summary with Git Notes:**
-   - **Step 9.1: Get Commit Hash:** Obtain the hash of the *just-completed commit* (`git log -1 --format="%H"`).
-   - **Step 9.2: Draft Note Content:** Create a detailed summary for the completed task. This should include the task name, a summary of changes, a list of all created/modified files, and the core "why" for the change.
-   - **Step 9.3: Attach Note:** Use the `git notes` command to attach the summary to the commit.
+9. **使用 Git Notes 附加任務摘要：**
+   - **步驟 9.1：取得提交雜湊：** 取得*剛完成提交*的雜湊 (`git log -1 --format="%H"`)。
+   - **步驟 9.2：草擬備註內容：** 為已完成的任務建立詳細摘要。這應包含任務名稱、變更摘要、所有建立/修改檔案的清單，以及變更的核心「原因」。
+   - **步驟 9.3：附加備註：** 使用 `git notes` 命令將摘要附加到提交。
      ```bash
-     # The note content from the previous step is passed via the -m flag.
+     # 上一步的備註內容透過 -m 標誌傳遞。
      git notes add -m "<note content>" <commit_hash>
      ```
 
-10. **Get and Record Task Commit SHA:**
-    - **Step 10.1: Update Plan:** Read `plan.md`, find the line for the completed task, update its status from `[~]` to `[x]`, and append the first 7 characters of the *just-completed commit's* commit hash.
-    - **Step 10.2: Write Plan:** Write the updated content back to `plan.md`.
+10. **取得並記錄任務提交 SHA：**
+    - **步驟 10.1：更新計畫：** 讀取 `plan.md`，找到已完成任務的行，將其狀態從 `[~]` 更新為 `[x]`，並附加*剛完成提交*的提交雜湊前 7 個字元。
+    - **步驟 10.2：寫入計畫：** 將更新的內容寫回 `plan.md`。
 
-11. **Commit Plan Update:**
-    - **Action:** Stage the modified `plan.md` file.
-    - **Action:** Commit this change with a descriptive message (e.g., `conductor(plan): Mark task 'Create user model' as complete`).
+11. **提交計畫更新：**
+    - **行動：** 暫存修改後的 `plan.md` 檔案。
+    - **行動：** 使用描述性訊息提交此變更 (例如：`conductor(plan): <階段名稱>`)。
 
-### Phase Completion Verification and Checkpointing Protocol
+### 階段完成驗證與檢查點協議
 
-**Trigger:** This protocol is executed immediately after a task is completed that also concludes a phase in `plan.md`.
+**觸發條件：** 此協議在完成一個任務且該任務同時結束 `plan.md` 中的一個階段後立即執行。
 
-1.  **Announce Protocol Start:** Inform the user that the phase is complete and the verification and checkpointing protocol has begun.
+1.  **宣佈協議開始：** 告知使用者該階段已完成且驗證和檢查點協議已開始。
 
-2.  **Ensure Test Coverage for Phase Changes:**
-    -   **Step 2.1: Determine Phase Scope:** To identify the files changed in this phase, you must first find the starting point. Read `plan.md` to find the Git commit SHA of the *previous* phase's checkpoint. If no previous checkpoint exists, the scope is all changes since the first commit.
-    -   **Step 2.2: List Changed Files:** Execute `git diff --name-only <previous_checkpoint_sha> HEAD` to get a precise list of all files modified during this phase.
-    -   **Step 2.3: Verify and Create Tests:** For each file in the list:
-        -   **CRITICAL:** First, check its extension. Exclude non-code files (e.g., `.json`, `.md`, `.yaml`).
-        -   For each remaining code file, verify a corresponding test file exists.
-        -   If a test file is missing, you **must** create one. Before writing the test, **first, analyze other test files in the repository to determine the correct naming convention and testing style.** The new tests **must** validate the functionality described in this phase's tasks (`plan.md`).
+2.  **確保階段變更的測試覆蓋率：**
+    -   **步驟 2.1：確定階段範圍：** 為識別此階段中變更的檔案，你必須首先找到起始點。讀取 `plan.md` 以找到*前一個*階段檢查點的 Git 提交 SHA。如果不存在前一個檢查點，則範圍為自第一個提交以來的所有變更。
+    -   **步驟 2.2：列出變更的檔案：** 執行 `git diff --name-only <previous_checkpoint_sha> HEAD` 以取得此階段中所有修改檔案的精確清單。
+    -   **步驟 2.3：驗證並建立測試：** 對於清單中的每個檔案：
+        -   **關鍵：** 首先，檢查其副檔名。排除非程式碼檔案（例如：`.json`、`.md`、`.yaml`）。
+        -   對於每個剩餘的程式碼檔案，驗證是否存在對應的測試檔案。
+        -   如果測試檔案遺失，你**必須**建立一個。在撰寫測試之前，**首先，分析儲存庫中的其他測試檔案以確定正確的命名慣例和測試風格。** 新測試**必須**驗證此階段任務 (`plan.md`) 中描述的功能。
 
-3.  **Execute Automated Tests with Proactive Debugging:**
-    -   Before execution, you **must** announce the exact shell command you will use to run the tests.
-    -   **Example Announcement:** "I will now run the automated test suite to verify the phase. **Command:** `CI=true npm test`"
-    -   Execute the announced command.
-    -   If tests fail, you **must** inform the user and begin debugging. You may attempt to propose a fix a **maximum of two times**. If the tests still fail after your second proposed fix, you **must stop**, report the persistent failure, and ask the user for guidance.
+3.  **執行自動化測試並主動除錯：**
+    -   在執行之前，你**必須**宣佈將用於執行測試的確切 shell 命令。
+    -   **宣佈範例：**「我現在將執行自動化測試套件以驗證該階段。**命令：** `CI=true npm test`」
+    -   執行宣佈的命令。
+    -   如果測試失敗，你**必須**告知使用者並開始除錯。你最多可以嘗試提出**兩次**修復方案。如果在你第二次提出的修復後測試仍然失敗，你**必須停止**，報告持續性失敗，並請求使用者指導。
 
-4.  **Propose a Detailed, Actionable Manual Verification Plan:**
-    -   **CRITICAL:** To generate the plan, first analyze `product.md`, `product-guidelines.md`, and `plan.md` to determine the user-facing goals of the completed phase.
-    -   You **must** generate a step-by-step plan that walks the user through the verification process, including any necessary commands and specific, expected outcomes.
-    -   The plan you present to the user **must** follow this format:
+4.  **提出詳細、可操作的手動驗證計畫：**
+    -   **關鍵：** 為生成計畫，首先分析 `product.md`、`product-guidelines.md` 及 `plan.md`，以確定已完成階段的面向使用者的目標。
+    -   你**必須**生成一個逐步計畫，引導使用者完成驗證過程，包含任何必要的命令和具體的預期結果。
+    -   你向使用者展示的計畫**必須**遵循以下格式：
 
-        **For a Frontend Change:**
+        **針對前端變更：**
         ```
-        The automated tests have passed. For manual verification, please follow these steps:
+        自動化測試已通過。對於手動驗證，請遵循以下步驟：
 
-        **Manual Verification Steps:**
-        1.  **Start the development server with the command:** `npm run dev`
-        2.  **Open your browser to:** `http://localhost:3000`
-        3.  **Confirm that you see:** The new user profile page, with the user's name and email displayed correctly.
-        ```
-
-        **For a Backend Change:**
-        ```
-        The automated tests have passed. For manual verification, please follow these steps:
-
-        **Manual Verification Steps:**
-        1.  **Ensure the server is running.**
-        2.  **Execute the following command in your terminal:** `curl -X POST http://localhost:8080/api/v1/users -d '{"name": "test"}'`
-        3.  **Confirm that you receive:** A JSON response with a status of `201 Created`.
+        **手動驗證步驟：**
+        1.  **使用以下命令啟動開發伺服器：** `npm run dev`
+        2.  **在瀏覽器中開啟：** `http://localhost:3000`
+        3.  **確認你看到：** 新的使用者個人資料頁面，使用者名稱和電子郵件正確顯示。
         ```
 
-5.  **Await Explicit User Feedback:**
-    -   After presenting the detailed plan, ask the user for confirmation: "**Does this meet your expectations? Please confirm with yes or provide feedback on what needs to be changed.**"
-    -   **PAUSE** and await the user's response. Do not proceed without an explicit yes or confirmation.
+        **針對後端變更：**
+        ```
+        自動化測試已通過。對於手動驗證，請遵循以下步驟：
 
-6.  **Create Checkpoint Commit:**
-    -   Stage all changes. If no changes occurred in this step, proceed with an empty commit.
-    -   Perform the commit with a clear and concise message (e.g., `conductor(checkpoint): Checkpoint end of Phase X`).
+        **手動驗證步驟：**
+        1.  **確保伺服器正在運行。**
+        2.  **在你的終端機中執行以下命令：** `curl -X POST http://localhost:8080/api/v1/users -d '{"name": "test"}'`
+        3.  **確認你收到：** 狀態為 `201 Created` 的 JSON 回應。
+        ```
 
-7.  **Attach Auditable Verification Report using Git Notes:**
-    -   **Step 8.1: Draft Note Content:** Create a detailed verification report including the automated test command, the manual verification steps, and the user's confirmation.
-    -   **Step 8.2: Attach Note:** Use the `git notes` command and the full commit hash from the previous step to attach the full report to the checkpoint commit.
+5.  **等待使用者明確回饋：**
+    -   在展示詳細計畫後，詢問使用者確認：「**這是否符合你的期望？請確認 yes 或提供需要變更的回饋。**」
+    -   **暫停**並等待使用者的回覆。在沒有明確的 yes 或確認之前，不要繼續。
 
-8.  **Get and Record Phase Checkpoint SHA:**
-    -   **Step 7.1: Get Commit Hash:** Obtain the hash of the *just-created checkpoint commit* (`git log -1 --format="%H"`).
-    -   **Step 7.2: Update Plan:** Read `plan.md`, find the heading for the completed phase, and append the first 7 characters of the commit hash in the format `[checkpoint: <sha>]`.
-    -   **Step 7.3: Write Plan:** Write the updated content back to `plan.md`.
+6.  **建立檢查點提交：**
+    -   暫存所有變更。如果此步驟沒有任何變更，則進行空提交。
+    -   使用清晰簡潔的訊息執行提交（例如：`conductor(checkpoint): 階段X 檢查點`）。
 
-9. **Commit Plan Update:**
-    - **Action:** Stage the modified `plan.md` file.
-    - **Action:** Commit this change with a descriptive message following the format `conductor(plan): Mark phase '<PHASE NAME>' as complete`.
+7.  **使用 Git Notes 附加可稽核的驗證報告：**
+    -   **步驟 8.1：草擬備註內容：** 建立一份詳細的驗證報告，包括自動化測試命令、手動驗證步驟和使用者的確認。
+    -   **步驟 8.2：附加備註：** 使用 `git notes` 命令和上一步的完整提交雜湊，將完整報告附加到檢查點提交。
 
-10.  **Announce Completion:** Inform the user that the phase is complete and the checkpoint has been created, with the detailed verification report attached as a git note.
+8.  **取得並記錄階段檢查點 SHA：**
+    -   **步驟 7.1：取得提交雜湊：** 取得*剛建立的檢查點提交*的雜湊 (`git log -1 --format="%H"`)。
+    -   **步驟 7.2：更新計畫：** 讀取 `plan.md`，找到已完成階段的標題，並以 `[checkpoint: <sha>]` 格式附加提交雜湊的前 7 個字元。
+    -   **步驟 7.3：寫入計畫：** 將更新的內容寫回 `plan.md`。
 
-### Quality Gates
+9. **提交計畫更新：**
+    - **行動：** 暫存修改後的 `plan.md` 檔案。
+    - **行動：** 使用遵循 `conductor(plan): 階段X 完成` 格式的描述性訊息提交此變更。
 
-Before marking any task complete, verify:
+10.  **宣佈完成：** 告知使用者該階段已完成且檢查點已建立，詳細的驗證報告已作為 git note 附加。
 
-- [ ] All tests pass
-- [ ] Code coverage meets requirements (>80%)
-- [ ] Code follows project's code style guidelines (as defined in `code_styleguides/`)
-- [ ] All public functions/methods are documented (e.g., docstrings, JSDoc, GoDoc)
-- [ ] Type safety is enforced (e.g., type hints, TypeScript types, Go types)
-- [ ] No linting or static analysis errors (using the project's configured tools)
-- [ ] Works correctly on mobile (if applicable)
-- [ ] Documentation updated if needed
-- [ ] No security vulnerabilities introduced
+### 品質關卡
 
-## Development Commands
+在將任何任務標記為完成之前，請驗證：
 
-**AI AGENT INSTRUCTION: This section should be adapted to the project's specific language, framework, and build tools.**
+- [ ] 所有測試通過
+- [ ] 程式碼覆蓋率符合要求 (>80%)
+- [ ] 程式碼遵循專案的程式碼風格指南 (定義於 `code_styleguides/`)
+- [ ] 所有公開函式/方法都已記錄文件 (例如：docstrings、JSDoc、GoDoc)
+- [ ] 型別安全已強制執行 (例如：型別提示、TypeScript 型別、Go 型別)
+- [ ] 沒有 linting 或靜態分析錯誤 (使用專案配置的工具)
+- [ ] 在行動裝置上正常運作 (如果適用)
+- [ ] 文件已視需要更新
+- [ ] 沒有引入安全漏洞
 
-### Setup
+## 開發命令
+
+**AI 代理指示：本區段應根據專案的特定語言、框架和建置工具進行調整。**
+
+### 設定
 ```bash
-# Example: Commands to set up the development environment (e.g., install dependencies, configure database)
-# e.g., for a Node.js project: npm install
-# e.g., for a Go project: go mod tidy
+# 範例：設定開發環境的命令（例如：安裝相依性、配置資料庫）
+# 例如：對於 Node.js 專案：npm install
+# 例如：對於 Go 專案：go mod tidy
 ```
 
-### Daily Development
+### 日常開發
 ```bash
-# Example: Commands for common daily tasks (e.g., start dev server, run tests, lint, format)
-# e.g., for a Node.js project: npm run dev, npm test, npm run lint
-# e.g., for a Go project: go run main.go, go test ./..., go fmt ./...
+# 範例：日常任務的常用命令（例如：啟動開發伺服器、執行測試、lint、格式化）
+# 例如：對於 Node.js 專案：npm dev, npm test, npm run lint
+# 例如：對於 Go 專案：go run main.go, go test ./..., go fmt ./...
 ```
 
-### Before Committing
+### 提交前
 ```bash
-# Example: Commands to run all pre-commit checks (e.g., format, lint, type check, run tests)
-# e.g., for a Node.js project: npm run check
-# e.g., for a Go project: make check (if a Makefile exists)
+# 範例：執行所有預提交檢查的命令（例如：格式化、lint、型別檢查、執行測試）
+# 例如：對於 Node.js 專案：npm run check
+# 例如：對於 Go 專案：make check（如果存在 Makefile）
 ```
 
-## Testing Requirements
+## 測試要求
 
-### Unit Testing
-- Every module must have corresponding tests.
-- Use appropriate test setup/teardown mechanisms (e.g., fixtures, beforeEach/afterEach).
-- Mock external dependencies.
-- Test both success and failure cases.
+### 單元測試
+- 每個模組都必須有對應的測試。
+- 使用適當的測試設定/清理機制（例如：fixtures、beforeEach/afterEach）。
+- 模擬外部相依性。
+- 測試成功和失敗兩種情況。
 
-### Integration Testing
-- Test complete user flows
-- Verify database transactions
-- Test authentication and authorization
-- Check form submissions
+### 整合測試
+- 測試完整的使用者流程
+- 驗證資料庫交易
+- 測試身分驗證和授權
+- 檢查表單提交
 
-### Mobile Testing
-- Test on actual iPhone when possible
-- Use Safari developer tools
-- Test touch interactions
-- Verify responsive layouts
-- Check performance on 3G/4G
+### 行動裝置測試
+- 盡可能在實際 iPhone 上測試
+- 使用 Safari 開發者工具
+- 測試觸控互動
+- 驗證響應式佈局
+- 檢查 3G/4G 上的效能
 
-## Code Review Process
+## 程式碼審查流程
 
-### Self-Review Checklist
-Before requesting review:
+### 自我審查檢查清單
+在請求審查之前：
 
-1. **Functionality**
-   - Feature works as specified
-   - Edge cases handled
-   - Error messages are user-friendly
+1. **功能性**
+   - 功能按規格運作
+   - 邊緣情況已處理
+   - 錯誤訊息對使用者友善
 
-2. **Code Quality**
-   - Follows style guide
-   - DRY principle applied
-   - Clear variable/function names
-   - Appropriate comments
+2. **程式碼品質**
+   - 遵循風格指南
+   - 應用 DRY 原則
+   - 變數/函式名稱清晰
+   - 註解適當
 
-3. **Testing**
-   - Unit tests comprehensive
-   - Integration tests pass
-   - Coverage adequate (>80%)
+3. **測試**
+   - 單元測試全面
+   - 整合測試通過
+   - 覆蓋率足夠 (>80%)
 
-4. **Security**
-   - No hardcoded secrets
-   - Input validation present
-   - SQL injection prevented
-   - XSS protection in place
+4. **安全性**
+   - 沒有硬編碼的機密資訊
+   - 存在輸入驗證
+   - 防止 SQL 注入
+   - XSS 防護措施到位
 
-5. **Performance**
-   - Database queries optimized
-   - Images optimized
-   - Caching implemented where needed
+5. **效能**
+   - 資料庫查詢已最佳化
+   - 圖片已最佳化
+   - 在需要的地方實作快取
 
-6. **Mobile Experience**
-   - Touch targets adequate (44x44px)
-   - Text readable without zooming
-   - Performance acceptable on mobile
-   - Interactions feel native
+6. **行動裝置體驗**
+   - 觸控目標適當 (44x44px)
+   - 文字無需縮放即可閱讀
+   - 行動裝置上效能可接受
+   - 互動感覺如同原生
 
-## Commit Guidelines
+## 提交指南
 
-### Message Format
+### 訊息格式
 ```
-<type>(<scope>): <description>
+<類型>(<範圍>): <描述>
 
-[optional body]
+[可選的內文]
 
-[optional footer]
+[可選的頁尾]
 ```
 
-### Types
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation only
-- `style`: Formatting, missing semicolons, etc.
-- `refactor`: Code change that neither fixes a bug nor adds a feature
-- `test`: Adding missing tests
-- `chore`: Maintenance tasks
+### 類型
+- `feat`: 新功能
+- `fix`: 錯誤修復
+- `docs`: 僅文件
+- `style`: 格式化、遺失分號等
+- `refactor`: 既非修復錯誤也非新增功能的程式碼變更
+- `test`: 新增遺失的測試
+- `chore`: 維護任務
 
-### Examples
+### 範例
 ```bash
 git commit -m "feat(auth): Add remember me functionality"
 git commit -m "fix(posts): Correct excerpt generation for short posts"
@@ -260,74 +260,73 @@ git commit -m "test(comments): Add tests for emoji reaction limits"
 git commit -m "style(mobile): Improve button touch targets"
 ```
 
-## Definition of Done
+## 完成定義
 
-A task is complete when:
+當滿足以下條件時，任務即為完成：
 
-1. All code implemented to specification
-2. Unit tests written and passing
-3. Code coverage meets project requirements
-4. Documentation complete (if applicable)
-5. Code passes all configured linting and static analysis checks
-6. Works beautifully on mobile (if applicable)
-7. Implementation notes added to `plan.md`
-8. Changes committed with proper message
-9. Git note with task summary attached to the commit
+1. 所有程式碼按規格實作
+2. 單元測試已撰寫且通過
+3. 程式碼覆蓋率符合專案要求
+4. 文件完成（如適用）
+5. 程式碼通過所有配置的 linting 和靜態分析檢查
+6. 在行動裝置上運作良好（如適用）
+7. 實作備註已加入 `plan.md`
+8. 變更已使用適當訊息提交
+9. 帶有任務摘要的 Git note 已附加到提交
 
-## Emergency Procedures
+## 緊急程序
 
-### Critical Bug in Production
-1. Create hotfix branch from main
-2. Write failing test for bug
-3. Implement minimal fix
-4. Test thoroughly including mobile
-5. Deploy immediately
-6. Document in plan.md
+### 生產環境中的關鍵錯誤
+1. 從 main 建立 hotfix 分支
+2. 為錯誤撰寫失敗測試
+3. 實作最小修復
+4. 徹底測試，包括行動裝置
+5. 立即部署
+6. 記錄於 plan.md
 
-### Data Loss
-1. Stop all write operations
-2. Restore from latest backup
-3. Verify data integrity
-4. Document incident
-5. Update backup procedures
+### 資料遺失
+1. 停止所有寫入操作
+2. 從最新備份還原
+3. 驗證資料完整性
+4. 記錄事件
+5. 更新備份程序
 
-### Security Breach
-1. Rotate all secrets immediately
-2. Review access logs
-3. Patch vulnerability
-4. Notify affected users (if any)
-5. Document and update security procedures
+### 安全漏洞
+1. 立即輪換所有機密資訊
+2. 審查存取日誌
+3. 修補漏洞
+4. 通知受影響的使用者（如有）
+5. 記錄並更新安全程序
 
-## Deployment Workflow
+## 部署工作流
 
-### Pre-Deployment Checklist
-- [ ] All tests passing
-- [ ] Coverage >80%
-- [ ] No linting errors
-- [ ] Mobile testing complete
-- [ ] Environment variables configured
-- [ ] Database migrations ready
-- [ ] Backup created
+### 部署前檢查清單
+- [ ] 所有測試通過
+- [ ] 覆蓋率 >80%
+- [ ] 沒有 linting 錯誤
+- [ ] 行動裝置測試完成
+- [ ] 環境變數已配置
+- [ ] 資料庫遷移已準備
+- [ ] 備份已建立
 
-### Deployment Steps
-1. Merge feature branch to main
-2. Tag release with version
-3. Push to deployment service
-4. Run database migrations
-5. Verify deployment
-6. Test critical paths
-7. Monitor for errors
+### 部署步驟
+1. 將功能分支合併到 main
+2. 用版本號標記發布
+3. 推送到部署服務
+4. 執行資料庫遷移
+5. 驗證部署
+6. 測試關鍵路徑
+7. 監控錯誤
 
-### Post-Deployment
-1. Monitor analytics
-2. Check error logs
-3. Gather user feedback
-4. Plan next iteration
+### 部署後
+1. 監控分析數據
+2. 檢查錯誤日誌
+3. 收集使用者回饋
+4. 規劃下一個迭代
 
-## Continuous Improvement
-
-- Review workflow weekly
-- Update based on pain points
-- Document lessons learned
-- Optimize for user happiness
-- Keep things simple and maintainable
+## 持續改進
+- 每週審查工作流
+- 根據痛點進行更新
+- 記錄經驗教訓
+- 為使用者滿意度最佳化
+- 保持簡單且可維護
