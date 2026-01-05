@@ -1,8 +1,8 @@
 # Plan: Navigation Logo Link to GitHub Repository
 
-## Phase 1: 設定檔配置
+## Phase 1: 設定檔配置 [checkpoint: 57afb16]
 - [x] 任務：建立 `src/config/site.ts` 並匯出 `siteConfig` 包含 `repoUrl` [0cfdd23]
-- [ ] 任務：Conductor - 使用者手動驗證 '設定檔配置' (協議詳見 workflow.md)
+- [x] 任務：Conductor - 使用者手動驗證 '設定檔配置' (協議詳見 workflow.md)
 
 ## Phase 2: 導覽列組件化與連結實作 (TDD)
 - [ ] 任務：建立 `src/components/Navbar.tsx` 與其測試檔案 `src/components/Navbar.test.tsx`
