@@ -1,0 +1,8 @@
+{
+    "track_id": "dashboard_search_20260116",
+    "type": "feature",
+    "status": "new",
+    "created_at": "2026-01-16T07:46:00Z",
+    "updated_at": "2026-01-16T07:46:00Z",
+    "description": "優化專案卡片列表與實作即時搜尋功能"
+}
