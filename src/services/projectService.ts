@@ -29,7 +29,19 @@ export async function getProjectsWithFallback(
   try {
     return await getProjects(token)
   } catch (error) {
+    if (token && isUnauthorizedGitHubError(error)) {
+      console.warn('GITHUB_TOKEN is invalid. Retrying with public GitHub API.')
+      return await getProjects(undefined)
+    }
+
     console.error('Failed to fetch projects from GitHub:', error)
     return sortProjectsAlphabetically(mockProjects)
   }
+}
+
+function isUnauthorizedGitHubError(error: unknown): boolean {
+  return typeof error === 'object'
+    && error !== null
+    && 'status' in error
+    && error.status === 401
 }

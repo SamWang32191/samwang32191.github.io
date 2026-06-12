@@ -111,5 +111,22 @@ describe('projectService', () => {
 
       consoleSpy.mockRestore()
     })
+
+    it('should retry public API when token is unauthorized', async () => {
+      vi.mocked(getUserPagesRepos)
+        .mockRejectedValueOnce({ status: 401 })
+        .mockResolvedValueOnce(mockRepos)
+      const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+      const projects = await getProjectsWithFallback('bad-token', mockProjects)
+
+      expect(consoleSpy).toHaveBeenCalledWith('GITHUB_TOKEN is invalid. Retrying with public GitHub API.')
+      expect(getUserPagesRepos).toHaveBeenNthCalledWith(1, 'bad-token')
+      expect(getUserPagesRepos).toHaveBeenNthCalledWith(2, undefined)
+      expect(projects[0].title).toBe('alpha-project')
+      expect(projects[1].title).toBe('zebra-project')
+
+      consoleSpy.mockRestore()
+    })
   })
 })

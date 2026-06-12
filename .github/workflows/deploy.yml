@@ -1,6 +1,9 @@
 name: Deploy to GitHub Pages
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -25,8 +28,6 @@ jobs:
       
       - name: Build
         run: npm run build
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
