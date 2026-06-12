@@ -1,49 +1,62 @@
 import { Octokit } from 'octokit'
-import { Project } from '@/types'
-import { GitHubRepo } from '@/types/github'
+import { siteConfig } from '@/config/site'
+import type { Project } from '@/types'
+import type { GitHubRepo } from '@/types/github'
 
 // Re-export the GitHubRepo type for external use
 export type { GitHubRepo }
 
+type ListForUserResponse = Awaited<ReturnType<Octokit['rest']['repos']['listForUser']>>
+type GitHubApiRepo = ListForUserResponse['data'][number]
+
 /**
- * Fetches repositories for the authenticated user and filters for those with GitHub Pages enabled.
+ * Fetches repositories for the configured user and filters for those with GitHub Pages enabled.
  * Excludes repositories with the 'hidden-from-hub' topic.
  */
-export async function getUserPagesRepos(token: string): Promise<GitHubRepo[]> {
-  const octokit = new Octokit({ auth: token })
+export async function getUserPagesRepos(token?: string): Promise<GitHubRepo[]> {
+  const octokit = new Octokit(token ? { auth: token } : {})
 
-  const { data } = await octokit.rest.repos.listForAuthenticatedUser({
+  const repos = await octokit.paginate(octokit.rest.repos.listForUser, {
+    username: siteConfig.githubOwner,
     per_page: 100,
     sort: 'updated',
   })
 
-  // Filter and map to our internal interface
-  return data
-    .filter(repo => repo.has_pages)
-    .filter(repo => repo.homepage?.includes('samwang32191.github.io')) // 過濾掉Org的repo
+  return repos
+    .filter(isOwnedPagesRepo)
     .filter(repo => !repo.topics?.includes('hidden-from-hub'))
-    .map(repo => ({
+    .map((repo): GitHubRepo => ({
       id: repo.id,
       name: repo.name,
+      ownerLogin: repo.owner.login,
       description: repo.description,
       html_url: repo.html_url,
       has_pages: repo.has_pages ?? false,
-      homepage: repo.homepage,
+      homepage: getPagesUrl(repo),
       topics: repo.topics ?? [],
       stargazers_count: repo.stargazers_count ?? 0,
       updated_at: repo.updated_at ?? new Date().toISOString(),
     }))
 }
 
+function isOwnedPagesRepo(repo: GitHubApiRepo): boolean {
+  return Boolean(repo.has_pages) && repo.owner.login.toLowerCase() === siteConfig.githubOwner.toLowerCase()
+}
+
+function getPagesUrl(repo: GitHubApiRepo): string {
+  const isUserPagesRepo = repo.name.toLowerCase() === `${siteConfig.githubOwner.toLowerCase()}.github.io`
+
+  if (isUserPagesRepo) {
+    return `https://${siteConfig.pagesHost}/`
+  }
+
+  return `https://${siteConfig.pagesHost}/${repo.name}/`
+}
+
 /**
  * Transforms a GitHub repository object into the internal Project type.
  */
 export function transformToProject(repo: GitHubRepo): Project {
-  // Extract owner and repo name from html_url or use a safe default
-  const urlParts = repo.html_url.split('/')
-  const owner = urlParts[urlParts.length - 2]
-  const repoName = repo.name
-
   return {
     id: repo.id.toString(),
     title: repo.name,
@@ -51,7 +64,7 @@ export function transformToProject(repo: GitHubRepo): Project {
     url: repo.homepage ?? repo.html_url,
     githubUrl: repo.html_url,
     // Construct a predictable social preview URL using GitHub's Open Graph service
-    imageUrl: `https://opengraph.githubassets.com/1/${owner}/${repoName}`,
+    imageUrl: `https://opengraph.githubassets.com/1/${repo.ownerLogin}/${repo.name}`,
     topics: repo.topics,
     stars: repo.stargazers_count,
     lastUpdated: repo.updated_at,

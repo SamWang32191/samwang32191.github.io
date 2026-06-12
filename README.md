@@ -29,7 +29,7 @@ cp .env.example .env.local
 
 ### 環境設定
 
-若要從 GitHub 獲取真實資料，您需要設定 Personal Access Token：
+公開 GitHub Pages 專案不需要 Personal Access Token；網站會在建置時直接抓取 `SamWang32191` 的公開 repo。若想提高 GitHub API rate limit，或之後要抓取受限制的 repo，可以設定 Token：
 
 1. 前往 [GitHub Settings > Tokens](https://github.com/settings/tokens)
 2. 點選「Generate new token (classic)」
@@ -40,7 +40,7 @@ cp .env.example .env.local
 GITHUB_TOKEN=your_personal_access_token_here
 ```
 
-**注意：** 若未設定 Token，網站將使用 Mock Data 顯示示範專案。
+**注意：** Mock Data 只會在 GitHub API 呼叫失敗時使用；未設定 Token 仍會嘗試抓取公開 repo。
 
 ### 開發
 
@@ -95,7 +95,7 @@ src/
 
 在您的 GitHub 專案庫設定中，新增以下 Secret：
 
-- `GITHUB_TOKEN` - 您的 Personal Access Token（或使用預設的 GitHub Actions Token）
+- `GITHUB_TOKEN` - 選填，Personal Access Token，用於提高 GitHub API rate limit
 
 ## 貢獻
 

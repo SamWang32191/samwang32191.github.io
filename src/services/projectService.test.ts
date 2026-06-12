@@ -1,11 +1,12 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { getProjects, getProjectsWithFallback } from '@/services/projectService'
 import type { Project } from '@/types'
+import type { GitHubRepo } from '@/types/github'
 
 // Mock the github module
 vi.mock('@/lib/github', () => ({
   getUserPagesRepos: vi.fn(),
-  transformToProject: vi.fn((repo) => ({
+  transformToProject: vi.fn((repo: GitHubRepo): Project => ({
     id: repo.id.toString(),
     title: repo.name,
     description: repo.description ?? '',
@@ -16,7 +17,7 @@ vi.mock('@/lib/github', () => ({
     stars: repo.stargazers_count,
     lastUpdated: repo.updated_at,
   })),
-  sortProjectsAlphabetically: vi.fn((projects) => 
+  sortProjectsAlphabetically: vi.fn((projects: Project[]): Project[] =>
     [...projects].sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()))
   ),
 }))
@@ -27,6 +28,7 @@ const mockRepos = [
   {
     id: 1,
     name: 'zebra-project',
+    ownerLogin: 'user',
     description: 'A project starting with Z',
     html_url: 'https://github.com/user/zebra-project',
     has_pages: true,
@@ -38,6 +40,7 @@ const mockRepos = [
   {
     id: 2,
     name: 'alpha-project',
+    ownerLogin: 'user',
     description: 'A project starting with A',
     html_url: 'https://github.com/user/alpha-project',
     has_pages: true,
@@ -46,7 +49,7 @@ const mockRepos = [
     stargazers_count: 50,
     updated_at: '2024-01-10T08:00:00Z',
   },
-]
+] satisfies GitHubRepo[]
 
 const mockProjects: Project[] = [
   { id: 'mock-1', title: 'Mock Z', description: '', url: '', githubUrl: '', imageUrl: '', topics: [], stars: 0, lastUpdated: '' },
@@ -64,7 +67,7 @@ describe('projectService', () => {
 
   describe('getProjects', () => {
     it('should fetch repos and transform to sorted projects', async () => {
-      vi.mocked(getUserPagesRepos).mockResolvedValue(mockRepos as any)
+      vi.mocked(getUserPagesRepos).mockResolvedValue(mockRepos)
 
       const projects = await getProjects('fake-token')
 
@@ -77,21 +80,18 @@ describe('projectService', () => {
   })
 
   describe('getProjectsWithFallback', () => {
-    it('should return mock data when token is undefined', async () => {
-      const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    it('should fetch public repos when token is undefined', async () => {
+      vi.mocked(getUserPagesRepos).mockResolvedValue(mockRepos)
 
       const projects = await getProjectsWithFallback(undefined, mockProjects)
 
-      expect(consoleSpy).toHaveBeenCalledWith('GITHUB_TOKEN is not set. Using mock data.')
-      expect(getUserPagesRepos).not.toHaveBeenCalled()
-      expect(projects[0].title).toBe('Mock A')
-      expect(projects[1].title).toBe('Mock Z')
-
-      consoleSpy.mockRestore()
+      expect(getUserPagesRepos).toHaveBeenCalledWith(undefined)
+      expect(projects[0].title).toBe('alpha-project')
+      expect(projects[1].title).toBe('zebra-project')
     })
 
     it('should fetch real data when token is provided', async () => {
-      vi.mocked(getUserPagesRepos).mockResolvedValue(mockRepos as any)
+      vi.mocked(getUserPagesRepos).mockResolvedValue(mockRepos)
 
       const projects = await getProjectsWithFallback('real-token', mockProjects)
 

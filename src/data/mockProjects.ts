@@ -1,4 +1,4 @@
-import { Project } from '@/types'
+import type { Project } from '@/types'
 
 /**
  * Mock projects used as fallback when GitHub API is unavailable.

@@ -1,8 +1,9 @@
 "use client"
 
-import { useState, KeyboardEvent } from 'react'
-import { Project } from '@/types'
+import { useState } from 'react'
 import Image from 'next/image'
+import type { Project } from '@/types'
+import type { KeyboardEvent } from 'react'
 
 interface ProjectCardProps {
     project: Project

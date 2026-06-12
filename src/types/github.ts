@@ -5,6 +5,7 @@
 export interface GitHubRepo {
   id: number
   name: string
+  ownerLogin: string
   description: string | null
   html_url: string
   has_pages: boolean
